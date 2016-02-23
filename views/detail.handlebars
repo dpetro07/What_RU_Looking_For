@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="col s10 offset-s1">
+    <h1>Create Review</h1>
+
+    <div class="row">
+      <div class="input-field col s10 offset-s1">
+        <select id="inputfield">
+          <option value="" disabled selected>Category</option>
+          <option value="">All</option>
+          <option value="restaurants">Restaurants</option>
+          <option value="retail-&-services">Retails & Services</option>
+          <option value="health-&-beauty">Health and Beauty</option>
+          <option value="activities-&-events">Activities & Events</option>
+          <option value="spa">Spa</option>
+          <option value="dental">Dental</option>
+          <option value="doctors">Doctors, Clinics, Pharmacies</option>
+          <option value="hair-salon">Hair Salon</option>
+          <option value="fitness">Fitness</option>
+          <option value="sporting-events">Sporting Events</option>
+        </select>
+        <label>Category Select</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s10 offset-s1">
+        <i class="material-icons prefix">room</i>
+        <input id="icon_prefix" type="text" id="address">
+        <label for="icon_prefix">Address</label>
+      </div>
+    </div>
+
+    <div class="input-field col s6">
+      <i class="material-icons prefix">phone</i>
+      <input id="icon_telephone" type="tel" class="validate">
+      <label for="icon_telephone">Company Telephone</label>
+    </div>
+
+    <row>
+      <div class="input-field col s12">
+        <select multiple>
+          <option value="" disabled selected>Choose your option</option>
+          <option value="1">1 star</option>
+          <option value="2">2 stars</option>
+          <option value="3">3 stars</option>
+          <option value="4">4 stars</option>
+          <option value="5">5 stars</option>
+        </select>
+        <label>Rate your experience:</label>
+      </div>    
+
+      <div class="input-field col s12">
+        <select multiple>
+          <option value="" disabled selected>Choose your option</option>
+          <option value="1">$</option>
+          <option value="2">$$</option>
+          <option value="3">$$$</option>
+          <option value="4">$$$$</option>
+          <option value="5">$$$$$</option>
+        </select>
+        <label>Pricing:</label>
+      </div>
+    </row>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="textarea1">Description:</label>
+      </div>
+    </div>
+
+  </div>
+</div>
