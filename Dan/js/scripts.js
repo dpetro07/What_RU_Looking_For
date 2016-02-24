@@ -11,3 +11,8 @@ $(".dropdown-button").dropdown();
         $(document).ready(function(){
       $('.parallax').parallax();
     });
+
+//Filter initiator
+          $(document).ready(function() {
+    $('input#input_text, textarea#textarea1').characterCounter();
+  });
