@@ -2,6 +2,67 @@
   background-color: #CC0000;
 }
 
+.brand-logo {
+    font-family: 'Exo 2', sans-serif;
+}
+
 h1 {
   text-align: center;
+}
+
+
+.signupBtn {
+    background-color: #CC0000;
+}
+.signupBtn:hover {
+    background-color: black;
+}
+
+.filters {
+    border-style: solid;
+border-color: #CC0000;
+border-width: 4px;
+      box-shadow: 5px 5px .5em #000000;
+}
+
+
+
+
+.reviewBtn {
+    background-color: #CC0000;
+}
+.reviewBtn:hover {
+    background-color: black;
+}
+
+
+
+/*Parallex*/
+.parallax-bg3 {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+.bg3-1 {
+    margin: 0 auto;
+    max-width: 1920px;
+    position: relative;
+    width: 100%;
+}
+
+.parallaxHeader {
+    color: white;
+    text-shadow: 3px 3px 0px #000;
+    font-family: 'Exo 2', sans-serif;
+}
+
+
+
+
+
+
+.carouselImg {
+    width: 200px;
+    height: 200px;
 }
