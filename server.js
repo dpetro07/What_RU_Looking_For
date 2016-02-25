@@ -28,6 +28,22 @@ var expressHandlebars = require('express-handlebars');
 app.engine('handlebars', expressHandlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.get('/', function(req, res){
+  res.render('home');
+});
+
+app.get('/addreview', function(req, res){
+  res.render('detail');
+});
+
+app.get('/showreviews', function(req, res){
+  res.render('listing');
+})
+
+app.get('login', function(req, res){
+  res.render('login');
+})
+
 sequelize.sync().then(function() {
  app.listen(PORT, function() {
   console.log("LISTENING!");
