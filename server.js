@@ -2,8 +2,13 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+require('dotenv').config();
+
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('mysql://b558e03c477434:44e2e75f@us-cdbr-iron-east-03.cleardb.net/');
+
+app.use("/js") = require('./models/js');
+app.use("/css") = require('./models/css');
 
 app.use(require('express-session')({
  secret: 'magnusrex',
