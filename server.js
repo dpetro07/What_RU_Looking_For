@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+require('dotenv').config();
 
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('process.env.JAWSDB_URL');
