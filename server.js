@@ -20,6 +20,7 @@ else {
 
 app.use("/js", express.static('models/js'));
 app.use("/css", express.static('models/css'));
+app.use("/images", express.static('models/images'));
 
 
 app.use(require('express-session')({
@@ -40,6 +41,26 @@ app.use(bodyParser.urlencoded({extended: false}));
 var expressHandlebars = require('express-handlebars');
 app.engine('handlebars', expressHandlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+var Review = sequelize.define('Review', {
+  category: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  price: {
+    type: Sequelize.INTEGER
+  },
+  stars: {
+    type: Sequelize.INTEGER
+  },
+  description: {
+    type: Sequelize.TEXT
+  }
+});
 
 var User = sequelize.define('User', {
  email: {
