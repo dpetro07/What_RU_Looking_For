@@ -5,7 +5,18 @@ var PORT = process.env.PORT || 8080;
 require('dotenv').config();
 
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('process.env.JAWSDB_URL');
+var mysql = require('mysql');
+
+if(process.env.NODE_ENV === 'production') {
+  // HEROKU DB
+  console.log(process.env.JAWSDB_URL);
+  var sequelize = new Sequelize(process.env.JAWSDB_URL);
+} 
+else {
+  // LOCAL DB
+  var sequelize = new Sequelize('ruflyer_db', 'root');
+}
+
 
 app.use("/js", express.static('models/js'));
 app.use("/css", express.static('models/css'));
