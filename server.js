@@ -6,8 +6,9 @@ var PORT = process.env.PORT || 8080;
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('process.env.JAWSDB_URL');
 
-app.use("/js") = require('./models/js');
-app.use("/css") = require('./models/css');
+app.use("/js", express.static('models/js'));
+app.use("/css", express.static('models/css'));
+
 
 app.use(require('express-session')({
  secret: 'magnusrex',
