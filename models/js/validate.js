@@ -52,6 +52,9 @@ $(document).ready(function(){
       },
       price: {
         required: true
+      },      
+      stars: {
+        required: true
       },
       description: {
         required: true,
@@ -68,6 +71,9 @@ $(document).ready(function(){
       },      
       "price": {
         required: "You must select a price"
+      },      
+      "stars": {
+        required: "You must select a star rating"
       },
       "description": {
         required: "You must enter a description",
