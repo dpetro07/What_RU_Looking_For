@@ -93,6 +93,26 @@ var User = sequelize.define('User', {
    }
   },
   allowNull: false
+ }, 
+ firstname: {
+  type: Sequelize.STRING,
+  validate: {
+   len: {
+    args: [1,30],
+    msg: "You must have a first name"
+   }
+  },
+  allowNull: false
+}, 
+lastname: {
+  type: Sequelize.STRING,
+  validate: {
+   len: {
+    args: [1,30],
+    msg: "You must have a last name"
+   }
+  },
+  allowNull: false
  }
 }, {
  hooks: {
@@ -115,13 +135,17 @@ app.get('/showreviews', function(req, res){
   res.render('listing');
 });
 
-app.get('login', function(req, res){
+app.get('/login', function(req, res){
+  res.render('login');
+});
+
+app.get('/register', function(req, res){
   res.render('login');
 });
 
 app.post('/register', function(req, res){
   User.create(req.body).then(function(user){
-    res.redirect('listing');
+    res.redirect('home');
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
@@ -139,6 +163,6 @@ app.post('/newreview', function(req, res){
 
 sequelize.sync().then(function() {
  app.listen(PORT, function() {
-  console.log("LISTENING!");
+  console.log("LISTENING on port %s", PORT);
  });
 });

@@ -10,6 +10,10 @@ $(document).ready(function(){
       required: true,
       minlength: 2
     },
+    lastname: {
+      required: true,
+      minlength: 2
+    },
     password: {
       required: true,
       minlength: 7
@@ -27,6 +31,10 @@ $(document).ready(function(){
       },      
       "firstname": {
         required: "You must enter a first name",
+        minlength: "You must use at least 2 characters"
+      },
+      "lastname": {
+        required: "You must enter a last name",
         minlength: "You must use at least 2 characters"
       },      
       "password": {
