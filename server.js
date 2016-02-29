@@ -27,9 +27,9 @@ app.use(require('express-session')({
  secret: 'magnusrex',
  cookie: { secure: false,
   maxAge: 1000 * 60 * 60 * 24 * 14
- },
- saveUninitialized: true,
- resave: true
+},
+saveUninitialized: true,
+resave: true
 }));
 
 var session = require('express-session');
@@ -41,6 +41,44 @@ app.use(bodyParser.urlencoded({extended: false}));
 var expressHandlebars = require('express-handlebars');
 app.engine('handlebars', expressHandlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+
+var passport = require('passport');
+var passportLocal = require('passport-local');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+  done(null, { id: id, username: id })
+});
+
+passport.use(new passportLocal.Strategy(
+  function(username, password, done) {
+      //Check passwood in DB
+      User.findOne({
+        where:{
+          username: username
+        }
+      }).then(function(user){
+        //check password against hash
+        if(user){
+          bcrypt.compare(password, user.dataValues.password, function(err, user){
+            if(user){
+              //if password is correcnt authenticate the user with cookie
+              done(null, {id: username, username:username});
+            }else{
+              done(null,false);
+            }
+          });
+        }else {
+          done(null, null);
+        }
+      });
+    }));
 
 var Review = sequelize.define('Review', {
   category: {
@@ -68,41 +106,41 @@ var User = sequelize.define('User', {
   validate: {
    len: {
     args: [5,30],
-   },
-   isEmail: true
   },
-  unique: true,
-  allowNull: false
- },
- password: {
+  isEmail: true
+},
+unique: true,
+allowNull: false
+},
+password: {
   type: Sequelize.STRING,
   validate: {
    len: {
     args: [5,12],
     msg: "Your password must contain 5-12 characters"
-   }
-  },
-   allowNull: false
- },
- username: {
+  }
+},
+allowNull: false
+},
+username: {
   type: Sequelize.STRING,
   validate: {
    len: {
     args: [1,30],
     msg: "You must have a user name"
-   }
-  },
-  allowNull: false
- }, 
- firstname: {
+  }
+},
+allowNull: false
+}, 
+firstname: {
   type: Sequelize.STRING,
   validate: {
    len: {
     args: [1,30],
     msg: "You must have a first name"
-   }
-  },
-  allowNull: false
+  }
+},
+allowNull: false
 }, 
 lastname: {
   type: Sequelize.STRING,
@@ -110,16 +148,16 @@ lastname: {
    len: {
     args: [1,30],
     msg: "You must have a last name"
-   }
-  },
-  allowNull: false
- }
+  }
+},
+allowNull: false
+}
 }, {
  hooks: {
   beforeCreate: function(input){
    input.password = bcrypt.hashSync(input.password, 10);
-  }
  }
+}
 });
 
 
@@ -152,6 +190,12 @@ app.post('/register', function(req, res){
   });
 });
 
+app.post('/login',
+  passport.authenticate('local', { 
+  successRedirect: '/',
+  failureRedirect: '/login' })
+  );
+
 app.post('/newreview', function(req, res){
   Review.create(req.body).then(function(user){
     res.redirect('home');
@@ -164,5 +208,5 @@ app.post('/newreview', function(req, res){
 sequelize.sync().then(function() {
  app.listen(PORT, function() {
   console.log("LISTENING on port %s", PORT);
- });
+});
 });
