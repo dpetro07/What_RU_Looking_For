@@ -15,7 +15,7 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo center dropdown-button" data-activates="dropdown1"></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="sass.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
           <li><a href="#!">Food</a></li>
@@ -26,7 +26,7 @@
         </ul>
       </ul>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/login">Login</a></li>
+        <a class="modal-trigger" href="#login">Login</a>
       </ul>      
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/register">Register</a></li>
@@ -65,12 +65,46 @@
       </div>
     </div>
   </footer>
-  ​
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
-  <script type="text/javascript" src="/js/scripts.js"></script>
-  <script type="text/javascript" src="/js/validation.js"></script>
+
+
+  <!-- Modal Structure -->
+  <div id="login" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <!-- Login -->
+      <div class="container">
+        <div class="row">
+         
+         <h4>Login</h4>
+         <form action="/login" method="POST" class="col s6">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Username" id="loginusername" type="text" name="username">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Password" id="password" type="password" name="password">
+          </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">Login
+        </button>
+        </form>
+      </div>
+     </div>
+    </div>
+  <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Login!</a>
+  </div>
+</div>
+    ​
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/validation.js"></script>
 
 </body>
 </html>

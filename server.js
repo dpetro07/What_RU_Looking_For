@@ -173,10 +173,6 @@ app.get('/showreviews', function(req, res){
   res.render('listing');
 });
 
-app.get('/login', function(req, res){
-  res.render('login');
-});
-
 app.get('/register', function(req, res){
   res.render('login');
 });
