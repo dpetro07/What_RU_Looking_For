@@ -4,7 +4,7 @@
     <h1>Create Review</h1>
 
     <div class="row">
-      <div class="input-field col s10 offset-s1">
+      <div class="input-field col s10">
         <select id="inputfield" name="category">
           <option value="" disabled selected>Category</option>
           <option value="">All</option>
@@ -24,20 +24,21 @@
     </div>
 
     <div class="row">
-      <div class="input-field col s10 offset-s1">
-        <i class="material-icons prefix">room</i>
+      <div class="input-field col s10">
         <input id="icon_prefix" type="text" id="address" name="address">
         <label for="icon_prefix">Address</label>
       </div>
     </div>
 
-    <div class="input-field col s6">
-      <i class="material-icons prefix">phone</i>
-      <input id="icon_telephone" type="tel" class="validate" name="telephone">
+    <div class="row">
+          <div class="input-field col s10">
+      <input id="icon_telephone" type="tel" name="telephone">
       <label for="icon_telephone">Company Telephone</label>
     </div>
+    </div>
 
-    <row>
+
+    <div class="row">
       <div class="input-field col s6" name="stars">
         <select multiple>
           <option value="" disabled selected>Choose your option</option>
@@ -49,7 +50,8 @@
         </select>
         <label>Rate your experience:</label>
       </div>
-
+    </div>
+    <div class="row">
       <div class="input-field col s6" name="price">
         <select multiple>
           <option value="" disabled selected>Choose your option</option>
@@ -61,7 +63,7 @@
         </select>
         <label>Pricing:</label>
       </div>
-    </row>
+    </div>
 
     <div class="row">
       <div class="input-field col s12">
@@ -78,7 +80,4 @@
 
   </div>
 </div>
-
-
-
 

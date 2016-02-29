@@ -1,6 +1,6 @@
 $(document).ready(function(){
   
-  $("#loginform").validate({
+  $("#registerform").validate({
     rules: {
     username: {
       required: true,
@@ -89,4 +89,5 @@ $(document).ready(function(){
         maxlength: "You cannot use more than 500 characters"
       }
     }
+  });
 });

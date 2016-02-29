@@ -16,6 +16,10 @@ $(document).ready(function(){
   $('.parallax').parallax();
 });
 
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
 //Filter initiator
 $(document).ready(function() {
   $('input#input_text, textarea#textarea1').characterCounter();

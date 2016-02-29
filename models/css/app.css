@@ -4,3 +4,9 @@ color:red;
 #form input.error {
 border:1px solid red;
 }
+
+#docs {
+  display: block;
+  position: absolute;
+  bottom: 0;
+}

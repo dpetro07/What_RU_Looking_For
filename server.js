@@ -96,7 +96,8 @@ var Review = sequelize.define('Review', {
     type: Sequelize.INTEGER
   },
   description: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    allowNull: false
   }
 });
 
@@ -174,7 +175,7 @@ app.get('/showreviews', function(req, res){
 });
 
 app.get('/register', function(req, res){
-  res.render('login');
+  res.render('register');
 });
 
 app.post('/register', function(req, res){
