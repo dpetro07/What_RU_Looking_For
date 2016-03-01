@@ -80,8 +80,14 @@ passport.use(new passportLocal.Strategy(
       });
     }));
 
+
+
 var Review = sequelize.define('Review', {
   category: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  company: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -89,11 +95,15 @@ var Review = sequelize.define('Review', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  telephone: {
+    type: Sequelize.STRING,
+    isNumeric: true
+  },
   price: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   stars: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   description: {
     type: Sequelize.TEXT,
@@ -136,6 +146,7 @@ allowNull: false
 firstname: {
   type: Sequelize.STRING,
   validate: {
+   is: ["^[a-z]+$",'i'],
    len: {
     args: [1,30],
     msg: "You must have a first name"
@@ -145,6 +156,7 @@ allowNull: false
 }, 
 lastname: {
   type: Sequelize.STRING,
+  is: ["^[a-z]+$",'i'],
   validate: {
    len: {
     args: [1,30],
@@ -189,13 +201,15 @@ app.post('/register', function(req, res){
 
 app.post('/login',
   passport.authenticate('local', { 
-  successRedirect: '/',
-  failureRedirect: '/login' })
+    successRedirect: '/',
+    failureRedirect: '/login' })
   );
 
 app.post('/newreview', function(req, res){
+
   Review.create(req.body).then(function(user){
-    res.redirect('home');
+    console.log(req.body);
+    res.redirect('/');
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);

@@ -60,7 +60,12 @@ $(document).ready(function(){
       },
       price: {
         required: true
-      },      
+      },
+      telephone: {
+        required: false,
+        maxlength: 11,
+        digits: true
+      },
       stars: {
         required: true
       },
@@ -76,10 +81,14 @@ $(document).ready(function(){
       },      
       "address": {
         required: "You must enter an address"
-      },      
+      },
       "price": {
         required: "You must select a price"
-      },      
+      },
+      "telephone": {
+        maxlength: "The number cannot have more than 11 digits",
+        digits: "Please provide digits only"
+      },
       "stars": {
         required: "You must select a star rating"
       },
