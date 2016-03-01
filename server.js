@@ -205,8 +205,7 @@ app.post('/login',
 
 app.post('/newreview', function(req, res){
 
-  Review.create(req.body).then(function(user){
-    console.log(req.body);
+  Review.create(req.body).then(function(review){
     res.redirect('/');
   }).catch(function(err){
     console.log(err);
