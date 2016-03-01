@@ -202,7 +202,7 @@ app.post('/register', function(req, res){
 app.post('/login',
   passport.authenticate('local', { 
     successRedirect: '/',
-    failureRedirect: '/login' })
+    failureRedirect: '/register' })
   );
 
 app.post('/newreview', function(req, res){
