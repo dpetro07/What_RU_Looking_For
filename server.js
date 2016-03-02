@@ -171,6 +171,7 @@ allowNull: false
 }
 });
 
+User.hasMany(Review, {foreignKey: 'userid'});
 
 app.get('/', function(req, res){
   res.render('home');
@@ -181,7 +182,9 @@ app.get('/addreview', function(req, res){
 });
 
 app.get('/showreviews', function(req, res){
-  res.render('listing');
+  Review.findAll().then(function(reviews){
+    res.render('listing', {reviews});
+  })
 });
 
 app.get('/register', function(req, res){
@@ -211,6 +214,20 @@ app.post('/newreview', function(req, res){
     console.log(err);
     res.redirect('/?msg=' + err.message);
   });
+});
+
+app.post('/newcomment', function(req,res){
+  Comment.create(req.body).then(function(review){
+    res.redirect('/?msg=Comment Saved');
+  }).catch(function(err){
+    console.log(err);
+    res.redirect('/?msg=' + err.message);
+  });
+});
+
+app.get('/logout', function(req,res){
+  req.session.authenticated = false;
+  res.redirect('/');
 });
 
 sequelize.sync().then(function() {
