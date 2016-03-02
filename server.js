@@ -182,7 +182,7 @@ app.get('/addreview', function(req, res){
 });
 
 app.get('/showreviews', function(req, res){
-  Review.findAll().then(function(reviews){
+  Review.findAll().success(function(reviews){
     res.render('listing', {reviews});
   })
 });
