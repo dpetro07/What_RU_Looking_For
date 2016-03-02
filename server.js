@@ -82,7 +82,7 @@ passport.use(new passportLocal.Strategy(
 
 
 
-var Review = sequelize.define('Review', {
+var Place = sequelize.define('Place', {
   category: {
     type: Sequelize.STRING,
     allowNull: false
@@ -104,10 +104,25 @@ var Review = sequelize.define('Review', {
   },
   stars: {
     type: Sequelize.STRING
+  }
+});
+
+var Review = sequelize.define('Review', {
+  message: {
+    type: sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      len: {
+        args: [4, 500]
+      }
+    }
   },
-  description: {
-    type: Sequelize.TEXT,
-    allowNull: false
+  rating: {
+    type: sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      len: args [1]
+    }
   }
 });
 
@@ -116,7 +131,7 @@ var User = sequelize.define('User', {
   type: Sequelize.STRING,
   validate: {
    len: {
-    args: [5,30],
+    args: [5,30]
   },
   isEmail: true
 },
