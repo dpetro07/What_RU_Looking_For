@@ -79,15 +79,29 @@ h1 {
     color: black;
 }
 
-.poop {
-    color: purple;
+
+
+
+
+
+
+
+
+/*FOOTER*/
+
+.creators {
+    color: white;
 }
 
-
-.topFooter {
-    background-color: #CC0000;
+.creatorPic {
+    height: 100px;
+    width: 100px;
 }
 
-.bottomFooter {
+footer.page-footer {
     background-color: black;
+}
+
+footer.page-footer .footer-copyright {
+    background-color: #CC0000;
 }
