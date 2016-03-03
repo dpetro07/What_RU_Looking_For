@@ -211,93 +211,95 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
+app.post('/login',
+  passport.authenticate('local', { 
+    successRedirect: '/',
+    failureRedirect: '/register' })
+  );
+
 
 app.get('/addreview', isLoggedIn, function(req,res, next) {
   res.render('detail');
 });
 
-  app.get('/reviews', function(req, res){
-    Review.findAll().then(function(reviews){
-      res.render('listing', {reviews});
-    });
+app.get('/places', function(req, res){
+  Place.findAll().then(function(reviews){
+    res.render('listing', {reviews});
   });
+});
 
-  app.get('/reviews/bars', function(req, res){
-    Review.findAll({
-      where : {
-        category: nightlife
-      }
-    }).then(function(reviews){
-      res.render('listing', {reviews});
-    });
+app.get('/place/bars', function(req, res){
+  Place.findAll({
+    where : {
+      category: 'bars'
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
   });
+});
 
-  app.get('/reviews/food', function(req, res){
-    Review.findAll({
-      where : {
-        category: classroom 
-      }
-    }).then(function(reviews){
-      res.render('listing', {reviews});
-    });
+app.get('/place/food', function(req, res){
+  Place.findAll({
+    where : {
+      category: 'food'
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
   });
+});
 
-  app.get('/reviews/entertainment', function(req, res){
-    Review.findAll({
-      where : {
-        category: restaurant
-      }
-    }).then(function(reviews){
-      res.render('listing', {reviews});
-    });
+app.get('/place/entertainment', function(req, res){
+  Place.findAll({
+    where : {
+      category: 'entertainment'
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
   });
+});
 
-  app.get('/register', function(req, res){
-    res.render('register');
-  });
+app.get('/register', function(req, res){
+  res.render('register');
+});
 
-  app.post('/register', function(req, res){
-    User.create(req.body).then(function(user){
-      res.redirect('/');
-    }).catch(function(err){
-      console.log(err);
-      res.redirect('/?msg=' + err.message);
-    });
-  });
-
-  app.post('/login',
-    passport.authenticate('local', { 
-      successRedirect: '/',
-      failureRedirect: '/register' })
-    );
-
-  app.post('/newreview', function(req, res, next){
-    req.body.UserId = req.user.id;
-    Review.create(req.body).then(function(review){
-      res.redirect('/?msg=Review Saved');
-    }).catch(function(err){
-      console.log(err);
-      res.redirect('/?msg=' + err.message);
-    });
-  });
-
-  app.post('/newplace', function(req,res){
-    req.body.UserId = req.user.id;
-    Place.create(req.body).then(function(review){
-      res.redirect('/?msg=Place Saved');
-    }).catch(function(err){
-      console.log(err);
-      res.redirect('/?msg=' + err.message);
-    });
-  });
-
-  app.get('/logout', function(req,res){
-    req.session.authenticated = false;
+app.post('/register', function(req, res){
+  User.create(req.body).then(function(user){
     res.redirect('/');
+  }).catch(function(err){
+    console.log(err);
+    res.redirect('/?msg=' + err.message);
   });
+});
 
-  sequelize.sync().then(function() {
-   app.listen(PORT, function() {
-    console.log("LISTENING on port %s", PORT);
+
+
+app.post('/newreview', function(req, res, next){
+  req.body.UserId = req.user.id;
+  Review.create(req.body).then(function(review){
+    res.redirect('/?msg=Review Saved');
+  }).catch(function(err){
+    console.log(err);
+    res.redirect('/?msg=' + err.message);
   });
- });
+});
+
+app.post('/newplace', function(req,res){
+  req.body.UserId = req.user.id;
+  Place.create(req.body).then(function(review){
+    res.redirect('/?msg=Place Saved');
+  }).catch(function(err){
+    console.log(err);
+    res.redirect('/?msg=' + err.message);
+  });
+});
+
+app.get('/logout', function(req,res){
+  req.session.authenticated = false;
+  res.redirect('/');
+});
+
+sequelize.sync().then(function() {
+ app.listen(PORT, function() {
+  console.log("LISTENING on port %s", PORT);
+});
+});
