@@ -207,7 +207,13 @@ app.get('/addreview', function(req, res){
 });
 
 
-app.get('/reviews/nightlife', function(req, res){
+app.get('/reviews', function(req, res){
+  Review.findAll().then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/reviews/bars', function(req, res){
   Review.findAll({
     where : {
       category: nightlife
@@ -217,17 +223,17 @@ app.get('/reviews/nightlife', function(req, res){
   });
 });
 
-app.get('/reviews/classroom', function(req, res){
+app.get('/reviews/food', function(req, res){
   Review.findAll({
     where : {
-      category: classroom
+      category: classroom 
     }
   }).then(function(reviews){
     res.render('listing', {reviews});
   });
 });
 
-app.get('/reviews/restaurant', function(req, res){
+app.get('/reviews/entertainment', function(req, res){
   Review.findAll({
     where : {
       category: restaurant
@@ -281,7 +287,7 @@ app.get('/logout', function(req,res){
   res.redirect('/');
 });
 
-sequelize.sync({force: true}).then(function() {
+sequelize.sync().then(function() {
  app.listen(PORT, function() {
   console.log("LISTENING on port %s", PORT);
 });
