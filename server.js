@@ -206,8 +206,33 @@ app.get('/addreview', function(req, res){
   res.render('detail');
 });
 
-app.get('/showreviews', function(req, res){
-  Review.findAll().then(function(reviews){
+
+app.get('/reviews/nightlife', function(req, res){
+  Review.findAll({
+    where : {
+      category: nightlife
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/reviews/classroom', function(req, res){
+  Review.findAll({
+    where : {
+      category: classroom
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/reviews/restaurant', function(req, res){
+  Review.findAll({
+    where : {
+      category: restaurant
+    }
+  }).then(function(reviews){
     res.render('listing', {reviews});
   });
 });
