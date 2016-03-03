@@ -1,7 +1,7 @@
 {
   "name": "ruflyer",
   "version": "1.0.0",
-  "description": "",
+  "description": "What_RU_Looking_For",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,6 +12,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
+    "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
@@ -19,5 +20,14 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "sequelize": "^3.19.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dpetro07/What_RU_Looking_For.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dpetro07/What_RU_Looking_For/issues"
+  },
+  "homepage": "https://github.com/dpetro07/What_RU_Looking_For#readme"
 }
