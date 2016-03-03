@@ -4,21 +4,14 @@
     <h1>Create Review</h1>
 
     <div class="row">
-      <form action="/newreview" method="POST" class="col s12" id="reviewform">
+      <form action="/newplace" method="POST" class="col s12" id="placeform">
         <div class="input-field col s10">
           <select id="inputfield" name="category">
             <option value="" disabled selected>Category</option>
             <option value="">All</option>
             <option value="restaurants">Restaurants</option>
-            <option value="retail-&-services">Retails & Services</option>
-            <option value="health-&-beauty">Health and Beauty</option>
-            <option value="activities-&-events">Activities & Events</option>
-            <option value="spa">Spa</option>
-            <option value="dental">Dental</option>
-            <option value="doctors">Doctors, Clinics, Pharmacies</option>
-            <option value="hair-salon">Hair Salon</option>
-            <option value="fitness">Fitness</option>
-            <option value="sporting-events">Sporting Events</option>
+            <option value="nightlife">Nightlife</option>
+            <option value="classroom-buildings">Classroom Buildings</option>
           </select>
           <label>Category Select</label>
         </div>
@@ -71,13 +64,6 @@
         </div>
       </div>
 
-
-      <div class="row">
-        <div class="input-field col s10">
-        <textarea id="description" class="materialize-textarea" name="description"></textarea>
-          <label for="description">Description:</label>
-        </div>
-      </div>
 
       <button class="btn waves-effect waves-light" type="submit">Submit
       </button>
