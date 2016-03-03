@@ -22,6 +22,7 @@ app.use("/js", express.static('models/js'));
 app.use("/css", express.static('models/css'));
 app.use("/images", express.static('models/images'));
 
+var session = require('express-session');
 
 app.use(require('express-session')({
  secret: 'magnusrex',
@@ -32,7 +33,7 @@ saveUninitialized: true,
 resave: true
 }));
 
-var session = require('express-session');
+
 var bcrypt = require('bcryptjs');
 
 var bodyParser = require('body-parser');
@@ -50,15 +51,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user);
 });
-passport.deserializeUser(function(id, done) {
-  done(null, { id: id, username: id })
+passport.deserializeUser(function(user, done) {
+  done(null, user)
 });
 
 passport.use(new passportLocal.Strategy(
   function(username, password, done) {
-      //Check passwood in DB
+      //Check password in DB
       User.findOne({
         where:{
           username: username
@@ -66,10 +67,10 @@ passport.use(new passportLocal.Strategy(
       }).then(function(user){
         //check password against hash
         if(user){
-          bcrypt.compare(password, user.dataValues.password, function(err, user){
-            if(user){
+          bcrypt.compare(password, user.dataValues.password, function(err, bcryptUser){
+            if(bcryptUser){
               //if password is correcnt authenticate the user with cookie
-              done(null, {id: username, username:username});
+              done(null, user);
             }else{
               done(null,false);
             }
@@ -113,7 +114,7 @@ var Review = sequelize.define('Review', {
     allowNull: false,
     validate: {
       len: {
-        args: [4, 500]
+        args: [1, 500]
       }
     }
   },
@@ -189,11 +190,11 @@ allowNull: false
 });
 
 
-Review.belongsTo(User, {foreignKey: 'review_id'});
-User.hasMany(Review, {foreignKey: 'review_id'});
+Review.belongsTo(User);
+User.hasMany(Review);
 
-Place.belongsTo(User, {foreignKey: 'place_id'});
-User.hasMany(Place, {foreignKey: 'place_id'});
+Place.belongsTo(User);
+User.hasMany(Place);
 
 
 
@@ -231,7 +232,7 @@ app.post('/login',
   );
 
 app.post('/newreview', function(req, res){
-
+  req.body.UserId = req.user.id;
   Review.create(req.body).then(function(review){
     res.redirect('/?msg=Review Saved');
   }).catch(function(err){
@@ -241,6 +242,7 @@ app.post('/newreview', function(req, res){
 });
 
 app.post('/newplace', function(req,res){
+  req.body.UserId = req.user.id;
   Place.create(req.body).then(function(review){
     res.redirect('/?msg=Place Saved');
   }).catch(function(err){
@@ -254,7 +256,7 @@ app.get('/logout', function(req,res){
   res.redirect('/');
 });
 
-sequelize.sync().then(function() {
+sequelize.sync({force: true}).then(function() {
  app.listen(PORT, function() {
   console.log("LISTENING on port %s", PORT);
 });
