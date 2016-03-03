@@ -189,7 +189,11 @@ allowNull: false
 });
 
 
+Review.belongsTo(User, {foreignKey: 'review_id'});
+User.hasMany(Review, {foreignKey: 'review_id'});
 
+Place.belongsTo(User, {foreignKey: 'place_id'});
+User.hasMany(Place, {foreignKey: 'place_id'});
 
 
 
