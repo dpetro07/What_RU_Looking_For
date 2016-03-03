@@ -24,7 +24,7 @@ app.use("/images", express.static('models/images'));
 
 var session = require('express-session');
 
-app.use(require('express-session')({
+app.use(session({
  secret: 'magnusrex',
  cookie: { secure: false,
   maxAge: 1000 * 60 * 60 * 24 * 14
@@ -33,6 +33,13 @@ saveUninitialized: true,
 resave: true
 }));
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect("/?msg=Not Authenticated");
+  }
+}
 
 var bcrypt = require('bcryptjs');
 
@@ -46,6 +53,8 @@ app.set('view engine', 'handlebars');
 
 var passport = require('passport');
 var passportLocal = require('passport-local');
+
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -202,93 +211,93 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-app.get('/addreview', function(req, res){
+
+app.get('/addreview', isLoggedIn, function(req,res, next) {
   res.render('detail');
 });
 
-
-app.get('/reviews', function(req, res){
-  Review.findAll().then(function(reviews){
-    res.render('listing', {reviews});
+  app.get('/reviews', function(req, res){
+    Review.findAll().then(function(reviews){
+      res.render('listing', {reviews});
+    });
   });
-});
 
-app.get('/reviews/bars', function(req, res){
-  Review.findAll({
-    where : {
-      category: nightlife
-    }
-  }).then(function(reviews){
-    res.render('listing', {reviews});
+  app.get('/reviews/bars', function(req, res){
+    Review.findAll({
+      where : {
+        category: nightlife
+      }
+    }).then(function(reviews){
+      res.render('listing', {reviews});
+    });
   });
-});
 
-app.get('/reviews/food', function(req, res){
-  Review.findAll({
-    where : {
-      category: classroom 
-    }
-  }).then(function(reviews){
-    res.render('listing', {reviews});
+  app.get('/reviews/food', function(req, res){
+    Review.findAll({
+      where : {
+        category: classroom 
+      }
+    }).then(function(reviews){
+      res.render('listing', {reviews});
+    });
   });
-});
 
-app.get('/reviews/entertainment', function(req, res){
-  Review.findAll({
-    where : {
-      category: restaurant
-    }
-  }).then(function(reviews){
-    res.render('listing', {reviews});
+  app.get('/reviews/entertainment', function(req, res){
+    Review.findAll({
+      where : {
+        category: restaurant
+      }
+    }).then(function(reviews){
+      res.render('listing', {reviews});
+    });
   });
-});
 
-app.get('/register', function(req, res){
-  res.render('register');
-});
+  app.get('/register', function(req, res){
+    res.render('register');
+  });
 
-app.post('/register', function(req, res){
-  User.create(req.body).then(function(user){
+  app.post('/register', function(req, res){
+    User.create(req.body).then(function(user){
+      res.redirect('/');
+    }).catch(function(err){
+      console.log(err);
+      res.redirect('/?msg=' + err.message);
+    });
+  });
+
+  app.post('/login',
+    passport.authenticate('local', { 
+      successRedirect: '/',
+      failureRedirect: '/register' })
+    );
+
+  app.post('/newreview', function(req, res, next){
+    req.body.UserId = req.user.id;
+    Review.create(req.body).then(function(review){
+      res.redirect('/?msg=Review Saved');
+    }).catch(function(err){
+      console.log(err);
+      res.redirect('/?msg=' + err.message);
+    });
+  });
+
+  app.post('/newplace', function(req,res){
+    req.body.UserId = req.user.id;
+    Place.create(req.body).then(function(review){
+      res.redirect('/?msg=Place Saved');
+    }).catch(function(err){
+      console.log(err);
+      res.redirect('/?msg=' + err.message);
+    });
+  });
+
+  app.get('/logout', function(req,res){
+    req.session.authenticated = false;
     res.redirect('/');
-  }).catch(function(err){
-    console.log(err);
-    res.redirect('/?msg=' + err.message);
   });
-});
 
-app.post('/login',
-  passport.authenticate('local', { 
-    successRedirect: '/',
-    failureRedirect: '/register' })
-  );
-
-app.post('/newreview', function(req, res){
-  req.body.UserId = req.user.id;
-  Review.create(req.body).then(function(review){
-    res.redirect('/?msg=Review Saved');
-  }).catch(function(err){
-    console.log(err);
-    res.redirect('/?msg=' + err.message);
+  sequelize.sync().then(function() {
+   app.listen(PORT, function() {
+    console.log("LISTENING on port %s", PORT);
   });
-});
-
-app.post('/newplace', function(req,res){
-  req.body.UserId = req.user.id;
-  Place.create(req.body).then(function(review){
-    res.redirect('/?msg=Place Saved');
-  }).catch(function(err){
-    console.log(err);
-    res.redirect('/?msg=' + err.message);
-  });
-});
-
-app.get('/logout', function(req,res){
-  req.session.authenticated = false;
-  res.redirect('/');
-});
-
-sequelize.sync().then(function() {
- app.listen(PORT, function() {
-  console.log("LISTENING on port %s", PORT);
-});
-});
+ });
