@@ -109,7 +109,7 @@ var Place = sequelize.define('Place', {
 
 var Review = sequelize.define('Review', {
   message: {
-    type: sequelize.TEXT,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       len: {
@@ -118,10 +118,12 @@ var Review = sequelize.define('Review', {
     }
   },
   rating: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      len: args [1]
+      len: {
+        args: [1]
+      }
     }
   }
 });
@@ -186,7 +188,10 @@ allowNull: false
 }
 });
 
-User.hasMany(Review, {foreignKey: 'userid'});
+
+
+
+
 
 app.get('/', function(req, res){
   res.render('home');
@@ -224,16 +229,16 @@ app.post('/login',
 app.post('/newreview', function(req, res){
 
   Review.create(req.body).then(function(review){
-    res.redirect('/');
+    res.redirect('/?msg=Review Saved');
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
   });
 });
 
-app.post('/newcomment', function(req,res){
-  Comment.create(req.body).then(function(review){
-    res.redirect('/?msg=Comment Saved');
+app.post('/newplace', function(req,res){
+  Place.create(req.body).then(function(review){
+    res.redirect('/?msg=Place Saved');
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
