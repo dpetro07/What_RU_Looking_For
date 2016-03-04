@@ -12,7 +12,7 @@
         <p> {{ description }} </p>
       </div>
       <div>
-        <a href="/{{category}}/{{id}}"></a>
+        <a href="/place/{{category}}/{{id}}">Reviews</a>
       </div>
     </div>
   </div>
@@ -21,29 +21,3 @@
 
 
 
-<h3>Comment Section</h3>
-
-<form action="/newreview" method="POST" class="col s12" id="reviewform">
-  <div class="input-field col s10">
-    <div class="row">
-      <div class="input-field col s10">
-        <textarea id="description" class="materialize-textarea" name="description"></textarea>
-        <label for="description">Description:</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="row">
-        <div class="input-field col s5">
-          <input id="icon_prefix" type="number" id="stars" name="stars">
-          <label for="icon_prefix">Rating (1-5)</label>
-        </div>
-
-        <div class="input-field col s5">
-          <input id="icon_telephone" type="number" name="price">
-          <label for="icon_telephone">Price (1-5)</label>
-        </div>
-      </div>
-    </div>
-    </div>
-  </form>

@@ -268,11 +268,16 @@ app.get('/place/food', function(req, res){
 
 app.get('/place/entertainment', function(req, res){
   Place.findAll({
-    where : {
-      category: 'entertainment'
-    }
+    where : {category: 'entertainment'}
   }).then(function(reviews){
     res.render('listing', {reviews});
+  });
+});
+
+app.get('/place/:category/:id', function(req, res){
+  var id = req.params.id;
+  Place.findAll({where : {id: id}}).then(function(reviews){
+    res.render('singular', {reviews});
   });
 });
 
