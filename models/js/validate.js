@@ -1,29 +1,68 @@
 $(document).ready(function(){
+
+  $("reviewform").validate({
+    rules: {
+      description: {
+        required: true,
+        minlength: 2
+      },
+      stars: {
+        required: true,
+        maxlength: 1,
+        digits: true,
+        range: [1,5]
+      },      
+      price: {
+        required: false,
+        maxlength: 1,
+        digits: true,
+        range: [1,5]
+      }
+    },
+    messages: {
+      "stars" : {
+        required: "You must enter a rating",
+        maxlength: "You must enter a number between 1 and 5",
+        digits: "You may only enter digits",
+        range: "You must enter a number between 1 and 5"
+      },      
+      "price" : {
+        maxlength: "You must enter a number between 1 and 5",
+        digits: "You may only enter digits",
+        range: "You must enter a number between 1 and 5"
+      },
+      "description": {
+        required: "You must enter a description",
+        minlength: "You must use at least 2 characters",
+        maxlength: "You cannot use more than 500 characters"
+      }
+    }
+  });
   
   $("#registerform").validate({
     rules: {
-    username: {
-      required: true,
-      minlength: 2
+      username: {
+        required: true,
+        minlength: 2
+      },
+      firstname: {
+        required: true,
+        minlength: 2
+      },
+      lastname: {
+        required: true,
+        minlength: 2
+      },
+      password: {
+        required: true,
+        minlength: 7
+      },
+      email: {
+        required: true,
+        email: true,
+        minlength: 6
+      }
     },
-    firstname: {
-      required: true,
-      minlength: 2
-    },
-    lastname: {
-      required: true,
-      minlength: 2
-    },
-    password: {
-      required: true,
-      minlength: 7
-    },
-    email: {
-      required: true,
-      email: true,
-      minlength: 6
-    }
-  },
     messages: {
       "username": {
         required: "You must enter a username",
@@ -50,7 +89,7 @@ $(document).ready(function(){
   });
 
 
-  $("#reviewform").validate({
+  $("#placeform").validate({
     rules: {
       category: {
         required: true
@@ -59,7 +98,10 @@ $(document).ready(function(){
         required: true
       },
       price: {
-        required: false
+        required: false,
+        maxlength: 1,
+        digits: true,
+        range: [1,5]
       },
       telephone: {
         required: false,
@@ -67,7 +109,10 @@ $(document).ready(function(){
         digits: true
       },
       stars: {
-        required: false
+        required: true,
+        maxlength: 1,
+        digits: true,
+        range: [1,5]
       },
       description: {
         required: true,
@@ -81,6 +126,17 @@ $(document).ready(function(){
       },      
       "address": {
         required: "You must enter an address"
+      },
+      "stars" : {
+        required: "You must enter a rating",
+        maxlength: "You must enter a number between 1 and 5",
+        digits: "You may only enter digits",
+        range: "You must enter a number between 1 and 5"
+      },      
+      "price" : {
+        maxlength: "You must enter a number between 1 and 5",
+        digits: "You may only enter digits",
+        range: "You must enter a number between 1 and 5"
       },
       "telephone": {
         maxlength: "The number cannot have more than 11 digits",

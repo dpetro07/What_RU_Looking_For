@@ -22,8 +22,9 @@ app.use("/js", express.static('models/js'));
 app.use("/css", express.static('models/css'));
 app.use("/images", express.static('models/images'));
 
+var session = require('express-session');
 
-app.use(require('express-session')({
+app.use(session({
  secret: 'magnusrex',
  cookie: { secure: false,
   maxAge: 1000 * 60 * 60 * 24 * 14
@@ -32,7 +33,14 @@ saveUninitialized: true,
 resave: true
 }));
 
-var session = require('express-session');
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect("/?msg=Not Authenticated");
+  }
+}
+
 var bcrypt = require('bcryptjs');
 
 var bodyParser = require('body-parser');
@@ -46,19 +54,21 @@ app.set('view engine', 'handlebars');
 var passport = require('passport');
 var passportLocal = require('passport-local');
 
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user);
 });
-passport.deserializeUser(function(id, done) {
-  done(null, { id: id, username: id })
+passport.deserializeUser(function(user, done) {
+  done(null, user)
 });
 
 passport.use(new passportLocal.Strategy(
   function(username, password, done) {
-      //Check passwood in DB
+      //Check password in DB
       User.findOne({
         where:{
           username: username
@@ -66,10 +76,10 @@ passport.use(new passportLocal.Strategy(
       }).then(function(user){
         //check password against hash
         if(user){
-          bcrypt.compare(password, user.dataValues.password, function(err, user){
-            if(user){
+          bcrypt.compare(password, user.dataValues.password, function(err, bcryptUser){
+            if(bcryptUser){
               //if password is correcnt authenticate the user with cookie
-              done(null, {id: username, username:username});
+              done(null, user);
             }else{
               done(null,false);
             }
@@ -100,10 +110,25 @@ var Place = sequelize.define('Place', {
     isNumeric: true
   },
   price: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER,
+    isInt: true,
+    validate: {
+      isIn: [['1', '2', '3', '4', '5']],
+      len: {
+        args: [1]
+      }
+    }
   },
   stars: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER,
+    isInt: true,
+    allowNull: false,
+    validate: {
+      isIn: [['1', '2', '3', '4', '5']],
+      len: {
+        args: [1]
+      }
+    }
   }
 });
 
@@ -113,14 +138,16 @@ var Review = sequelize.define('Review', {
     allowNull: false,
     validate: {
       len: {
-        args: [4, 500]
+        args: [1, 500]
       }
     }
   },
   rating: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    isInt: true,
     validate: {
+      isIn: [['1', '2', '3', '4', '5']],
       len: {
         args: [1]
       }
@@ -152,6 +179,7 @@ allowNull: false
 },
 username: {
   type: Sequelize.STRING,
+  unique: true,
   validate: {
    len: {
     args: [1,30],
@@ -189,11 +217,11 @@ allowNull: false
 });
 
 
-Review.belongsTo(User, {foreignKey: 'review_id'});
-User.hasMany(Review, {foreignKey: 'review_id'});
+Review.belongsTo(User);
+User.hasMany(Review);
 
-Place.belongsTo(User, {foreignKey: 'place_id'});
-User.hasMany(Place, {foreignKey: 'place_id'});
+Place.belongsTo(User);
+User.hasMany(Place);
 
 
 
@@ -201,13 +229,55 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-app.get('/addreview', function(req, res){
+app.post('/login',
+  passport.authenticate('local', { 
+    successRedirect: '/?msg=Logged In',
+    failureRedirect: '/register' })
+  );
+
+
+app.get('/addreview', isLoggedIn, function(req,res, next) {
   res.render('detail');
 });
 
-app.get('/showreviews', function(req, res){
-  Review.findAll().then(function(reviews){
+app.get('/place', function(req, res){
+  Place.findAll().then(function(reviews){
     res.render('listing', {reviews});
+  });
+});
+
+app.get('/place/bars', function(req, res){
+  Place.findAll({
+    where : {
+      category: 'bars'
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/place/food', function(req, res){
+  Place.findAll({
+    where : {
+      category: 'food'
+    }
+  }).then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/place/entertainment', function(req, res){
+  Place.findAll({
+    where : {category: 'entertainment'}
+  }).then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/place/:category/:id', function(req, res){
+  var id = req.params.id;
+  Place.findAll({where : {id: id}}).then(function(reviews){
+    res.render('singular', {reviews});
   });
 });
 
@@ -224,14 +294,10 @@ app.post('/register', function(req, res){
   });
 });
 
-app.post('/login',
-  passport.authenticate('local', { 
-    successRedirect: '/',
-    failureRedirect: '/register' })
-  );
 
-app.post('/newreview', function(req, res){
 
+app.post('/newreview', isLoggedIn, function(req, res, next){
+  req.body.UserId = req.user.id;
   Review.create(req.body).then(function(review){
     res.redirect('/?msg=Review Saved');
   }).catch(function(err){
@@ -241,6 +307,7 @@ app.post('/newreview', function(req, res){
 });
 
 app.post('/newplace', function(req,res){
+  req.body.UserId = req.user.id;
   Place.create(req.body).then(function(review){
     res.redirect('/?msg=Place Saved');
   }).catch(function(err){
