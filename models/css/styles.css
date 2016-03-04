@@ -1,3 +1,55 @@
+/*INPUT FIELDS
+*/
+  /* label color */
+   .input-field label {
+     color: #CC0000;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #CC0000;
+   }
+   .input-field input[type=password]:focus + label {
+     color: #CC0000;
+   }
+   .input-field input[type=email]:focus + label {
+     color: #CC0000;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+   }
+   .input-field input[type=password]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+   }
+   .input-field input[type=email]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+   }
+
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #000;
+   }
+
+
+
+
+
+
+
+
 .nav-wrapper {
   background-color: #CC0000;
   font-family: 'Oswald', sans-serif;
@@ -11,6 +63,34 @@
 h1 {
   text-align: center;
 }
+
+
+
+/*LOGIN & REGISTER SECTION*/
+.loginHeader, .registerHeader {
+    text-align: center;
+}
+
+.loginCancel:hover {
+    background-color: black;
+    color: white;
+}
+.loginSubmit:hover {
+    background-color: #CC0000;
+    color: white;
+}
+
+
+.registerSubmitBtn {
+    background-color: #CC0000;
+    font-family: 'Oswald', sans-serif;
+}
+.registerSubmitBtn:hover {
+    background-color: black;
+}
+
+
+
 
 
 .signupBtn {
