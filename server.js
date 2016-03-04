@@ -110,10 +110,25 @@ var Place = sequelize.define('Place', {
     isNumeric: true
   },
   price: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER,
+    isInt: true,
+    validate: {
+      isIn: [['1', '2', '3', '4', '5']],
+      len: {
+        args: [1]
+      }
+    }
   },
   stars: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER,
+    isInt: true,
+    allowNull: false,
+    validate: {
+      isIn: [['1', '2', '3', '4', '5']],
+      len: {
+        args: [1]
+      }
+    }
   }
 });
 
@@ -130,7 +145,9 @@ var Review = sequelize.define('Review', {
   rating: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    isInt: true,
     validate: {
+      isIn: [['1', '2', '3', '4', '5']],
       len: {
         args: [1]
       }
@@ -162,6 +179,7 @@ allowNull: false
 },
 username: {
   type: Sequelize.STRING,
+  unique: true,
   validate: {
    len: {
     args: [1,30],
@@ -213,7 +231,7 @@ app.get('/', function(req, res){
 
 app.post('/login',
   passport.authenticate('local', { 
-    successRedirect: '/',
+    successRedirect: '/?msg=Logged In',
     failureRedirect: '/register' })
   );
 
@@ -222,7 +240,7 @@ app.get('/addreview', isLoggedIn, function(req,res, next) {
   res.render('detail');
 });
 
-app.get('/places', function(req, res){
+app.get('/place', function(req, res){
   Place.findAll().then(function(reviews){
     res.render('listing', {reviews});
   });
@@ -273,7 +291,7 @@ app.post('/register', function(req, res){
 
 
 
-app.post('/newreview', function(req, res, next){
+app.post('/newreview', isLoggedIn, function(req, res, next){
   req.body.UserId = req.user.id;
   Review.create(req.body).then(function(review){
     res.redirect('/?msg=Review Saved');

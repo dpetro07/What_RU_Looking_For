@@ -38,29 +38,14 @@
 
 
       <div class="row">
-        <div class="input-field col s5" id="stars">
-          <select name="stars">
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">1 star</option>
-            <option value="2">2 stars</option>
-            <option value="3">3 stars</option>
-            <option value="4">4 stars</option>
-            <option value="5">5 stars</option>
-          </select>
-          <label>Rate your experience:</label>
+        <div class="input-field col s5">
+          <input id="icon_prefix" type="number" id="stars" name="stars">
+          <label for="icon_prefix">Rating (1-5)</label>
         </div>
 
-
-        <div class="input-field col s5" id="price">
-          <select name="price">
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">$</option>
-            <option value="2">$$</option>
-            <option value="3">$$$</option>
-            <option value="4">$$$$</option>
-            <option value="5">$$$$$</option>
-          </select>
-          <label>Pricing:</label>
+        <div class="input-field col s5">
+          <input id="icon_telephone" type="number" name="price">
+          <label for="icon_telephone">Price (1-5)</label>
         </div>
       </div>
 
