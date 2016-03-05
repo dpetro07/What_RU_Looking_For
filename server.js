@@ -217,11 +217,16 @@ allowNull: false
 });
 
 
-Review.belongsTo(User);
 User.hasMany(Review);
+Review.belongsTo(User);
 
-Place.belongsTo(User);
 User.hasMany(Place);
+Place.belongsTo(User);
+
+Place.hasMany(Review);
+Review.belongsTo(Place);
+
+
 
 
 
@@ -232,7 +237,7 @@ app.get('/', function(req, res){
 app.post('/login',
   passport.authenticate('local', { 
     successRedirect: '/?msg=Logged In',
-    failureRedirect: '/register' })
+    failureRedirect: '/register?msg=Account not found' })
   );
 
 
@@ -276,10 +281,20 @@ app.get('/place/entertainment', function(req, res){
 
 app.get('/place/:category/:id', function(req, res){
   var id = req.params.id;
-  Place.findAll({where : {id: id}}).then(function(reviews){
-    res.render('singular', {reviews});
+  Place.findAll({
+    where : {id : id},
+    include : [{
+      model : Review,
+       include : [{
+        model: User
+      }]
+    }]
+  }).then(function(places){
+    res.render('singular', {places});
   });
+
 });
+
 
 app.get('/register', function(req, res){
   res.render('register');
@@ -287,7 +302,7 @@ app.get('/register', function(req, res){
 
 app.post('/register', function(req, res){
   User.create(req.body).then(function(user){
-    res.redirect('/');
+    res.redirect('/?msg=Account Created, Please Login');
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
@@ -296,8 +311,10 @@ app.post('/register', function(req, res){
 
 
 
-app.post('/newreview', isLoggedIn, function(req, res, next){
+app.post('/newreview/:id', isLoggedIn, function(req, res, next){
   req.body.UserId = req.user.id;
+  req.body.PlaceId = req.params.id;
+
   Review.create(req.body).then(function(review){
     res.redirect('/?msg=Review Saved');
   }).catch(function(err){
