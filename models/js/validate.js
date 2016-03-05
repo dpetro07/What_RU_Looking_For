@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
-  $("reviewform").validate({
+  $("#reviewform").validate({
     rules: {
-      description: {
+      comment: {
         required: true,
-        minlength: 2
+        minlength: 1
       },
-      stars: {
+      rating: {
         required: true,
         maxlength: 1,
         digits: true,
@@ -31,8 +31,8 @@ $(document).ready(function(){
         digits: "You may only enter digits",
         range: "You must enter a number between 1 and 5"
       },
-      "description": {
-        required: "You must enter a description",
+      "comment": {
+        required: "You must enter a comment",
         minlength: "You must use at least 2 characters",
         maxlength: "You cannot use more than 500 characters"
       }
@@ -96,6 +96,12 @@ $(document).ready(function(){
       },
       address: {
         required: true
+      },     
+      company: {
+        required: true
+      },      
+      imgUrl: {
+        required: true
       },
       price: {
         required: false,
@@ -126,13 +132,19 @@ $(document).ready(function(){
       },      
       "address": {
         required: "You must enter an address"
+      },      
+      "company": {
+        required: "You must enter a company name"
+      },
+      "imgUrl": {
+        required: "You must enter an image url"
       },
       "stars" : {
         required: "You must enter a rating",
         maxlength: "You must enter a number between 1 and 5",
         digits: "You may only enter digits",
         range: "You must enter a number between 1 and 5"
-      },      
+      },
       "price" : {
         maxlength: "You must enter a number between 1 and 5",
         digits: "You may only enter digits",

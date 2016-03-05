@@ -104,6 +104,10 @@ var Place = sequelize.define('Place', {
   address: {
     type: Sequelize.STRING,
     allowNull: false
+  },  
+  imgUrl: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   telephone: {
     type: Sequelize.STRING,
@@ -127,6 +131,15 @@ var Place = sequelize.define('Place', {
       isIn: [['1', '2', '3', '4', '5']],
       len: {
         args: [1]
+      }
+    }
+  },
+  desription: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      len: {
+        args: [1,500]
       }
     }
   }
@@ -231,7 +244,8 @@ Review.belongsTo(Place);
 
 
 app.get('/', function(req, res){
-  res.render('home');
+    res.render('home', {Authenticated : req.isAuthenticated()});
+    console.log(req.user);
 });
 
 app.post('/login',
@@ -241,8 +255,9 @@ app.post('/login',
   );
 
 
-app.get('/addreview', isLoggedIn, function(req,res, next) {
+app.get('/addplace', function(req,res) {
   res.render('detail');
+  console.log(req.user);
 });
 
 app.get('/place', function(req, res){
@@ -251,10 +266,10 @@ app.get('/place', function(req, res){
   });
 });
 
-app.get('/place/bars', function(req, res){
+app.get('/place/nightlife', function(req, res){
   Place.findAll({
     where : {
-      category: 'bars'
+      category: 'nightlife'
     }
   }).then(function(reviews){
     res.render('listing', {reviews});
@@ -271,9 +286,17 @@ app.get('/place/food', function(req, res){
   });
 });
 
-app.get('/place/entertainment', function(req, res){
+app.get('/place/classroom-buildings', function(req, res){
   Place.findAll({
-    where : {category: 'entertainment'}
+    where : {category: 'classroom-buildings'}
+  }).then(function(reviews){
+    res.render('listing', {reviews});
+  });
+});
+
+app.get('/place/tourism', function(req, res){
+  Place.findAll({
+    where : {category: 'tourism'}
   }).then(function(reviews){
     res.render('listing', {reviews});
   });
@@ -292,9 +315,22 @@ app.get('/place/:category/:id', function(req, res){
   }).then(function(places){
     res.render('singular', {places});
   });
-
 });
 
+app.get("/deleteplace/:id", function(req, res) {
+  var id = req.params.id;
+  Place.destroy({
+      where: {id: id},
+      include : [{
+        model: User
+      }]
+    }).then(function(place) {
+    res.redirect('/?msg=Review deleted');
+    }).catch(function(err) {
+      console.log(err);
+      res.redirect('/?msg=' + err.message);
+    });
+});
 
 app.get('/register', function(req, res){
   res.render('register');
@@ -311,7 +347,7 @@ app.post('/register', function(req, res){
 
 
 
-app.post('/newreview/:id', isLoggedIn, function(req, res, next){
+app.post('/newreview/:id', function(req, res){
   req.body.UserId = req.user.id;
   req.body.PlaceId = req.params.id;
 
@@ -323,7 +359,7 @@ app.post('/newreview/:id', isLoggedIn, function(req, res, next){
   });
 });
 
-app.post('/newplace', function(req,res){
+app.post('/addplace', function(req,res){
   req.body.UserId = req.user.id;
   Place.create(req.body).then(function(review){
     res.redirect('/?msg=Place Saved');
@@ -334,7 +370,7 @@ app.post('/newplace', function(req,res){
 });
 
 app.get('/logout', function(req,res){
-  req.session.authenticated = false;
+  req.logout();
   res.redirect('/');
 });
 

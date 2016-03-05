@@ -17,20 +17,29 @@
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="/">Home</a></li>
         <!-- Dropdown Structure -->
+        <a class='dropdown-button btn red darken-4' href='#' data-activates='dropdown1'>Categories!</a>
         <ul id="dropdown1" class="dropdown-content">
-          <li><a href="#!">Food</a></li>
+          <li><a href="/place/food">Food</a></li>
           <li class="divider"></li>
-          <li><a href="#!">Entertainment</a></li>
+          <li><a href="/place/nightlife">Nightlife</a></li>
           <li class="divider"></li>
-          <li><a href="#!">Bars</a></li>
+          <li><a href="/place/classroom-buildings">Classroom Buildings</a></li>
+          <li class="divider"></li>
+          <li><a href="/place/tourism">Tourism</a></li>
         </ul>
       </ul>
+      {{#if Authenticated}}
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <a class="modal-trigger" href="#login">Login</a>
-      </ul>      
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+      {{else}}
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/register">Register</a></li>
       </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a class="modal-trigger" href="#login">Login</a>
+      </ul>
+      {{/if}}
     </div>
   </nav> 
 
@@ -43,63 +52,30 @@
      <div class="modal-content">
       <form class="col s12" id="login-form" method="POST" action="/login">
         
-          <h3>Login</h3>
+          <h3 class="loginHeader">Please Login</h3>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col l10 offset-l1 m10 offset-m1 s12">
               <input id="username" type="text" name="username">
               <label for="username">Username</label>
             </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col l10 offset-l1 m10 offset-m1 s12">
               <input id="password" type="password" name="password">
               <label for="password">Password</label>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn modal-action modal-close waves-effect waves-green btn-flat">Cancel</button>
-          <button type="submit" class="btn modal-action modal-close waves-effect waves-green btn-flat">Submit</button>
+          <button type="button" class="btn modal-action modal-close waves-effect waves-green btn-flat loginCancel">Cancel</button>
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-green btn-flat loginSubmit">Submit</button>
         </div>
       </form>
      </div>
     </div>
 
 
+<div id="colorstrip"/>
 
-<!--Footer-->
-<footer class="page-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col l12">
-      <h1 class="creators">Meet the Makers</h1>
-        <!-- Wolfgang -->
-          <div class="col l4">
-            <h7 class="creators">Wolfgang Hall</h7>
-            <br>
-              <img class="creatorPic" src="images/wolfgang.png">
-          </div>
-        <!-- Dan -->
-          <div class="col l4">
-          <h7 class="creators">Daniel Petro</h7>
-          <br>
-            <img class="creatorPic" src="images/danielPetro.png">
-          </div>
-        <!-- Richard -->
-          <div class="col l4">
-          <h7 class="creators">Richard Mensah</h7>
-          <br>
-            <img class="creatorPic" src="images/richard.png">
-          </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
-    <div class="container">
-      © 2016 What'RU Looking For, All rights reserved
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-    </div>
-  </div>
-</footer>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
