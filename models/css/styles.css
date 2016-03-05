@@ -1,8 +1,14 @@
 
-.loginhead  {
-    width: 100px;
-    max-width: 100%;
-    height: 100%;
+.missionStatement {
+  text-align: center;
+}
+
+
+.categoryChoice {
+  color: black;
+}
+.categoryOption {
+  color: black;
 }
 
 
@@ -22,6 +28,15 @@
    .input-field input[type=email]:focus + label {
      color: #CC0000;
    }
+   .input-field input[type=number]:focus + label {
+     color: #CC0000;
+   }
+   .input-field input[type=search]:focus + label {
+     color: #CC0000;
+   }
+   .input-field input[type=tel]:focus + label {
+     color: #CC0000;
+   }
    /* label underline focus color */
    .input-field input[type=text]:focus {
      border-bottom: 1px solid black;
@@ -35,104 +50,193 @@
      border-bottom: 1px solid black;
      box-shadow: 0 1px 0 0 black;
    }
+   .input-field input[type=number]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+   }
+   .input-field input[type=search]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+   }
+   .input-field input[type=tel]:focus {
+     border-bottom: 1px solid black;
+     box-shadow: 0 1px 0 0 black;
+   }
 
    /* valid color */
    .input-field input[type=text].valid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
+     border-bottom: 1px solid red;
+     box-shadow: 0 1px 0 0 black;
    }
    /* invalid color */
    .input-field input[type=text].invalid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
+     border-bottom: 1px solid red;
+     box-shadow: 0 1px 0 0 black;
    }
    /* icon prefix focus color */
    .input-field .prefix.active {
-     color: #000;
+     color: black;
    }
 
 
-
-
-
-
-
-
+/*NAVBAR SECTION
+*/
 .nav-wrapper {
   background-color: #CC0000;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
-.missionStatement {
-  font-family: 'Oswald', sans-serif;   
-}
-
-
-h1 {
+/*MAIN BODY SECTION
+*/
+.missionStatement1 {
+  font-size: 1em;
+  font-family: 'Russo One', sans-serif;
   text-align: center;
 }
 
 
 
-/*LOGIN & REGISTER SECTION*/
+
+
+/*LOGIN, REGISTER & SIGNUPSECTION*/
 .loginHeader, .registerHeader {
+    text-align: center;
+}
+.loginCancel {
+    background-color: black;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
     text-align: center;
 }
 
 .loginCancel:hover {
-    background-color: black;
-    color: white;
-}
-.loginSubmit:hover {
     background-color: #CC0000;
     color: white;
+    font-family: 'Russo One', sans-serif;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
+    text-align: center;
+}
+.loginSubmit {
+    background-color: #CC0000;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
+    text-align: center;
+}
+.loginSubmit:hover {
+    background-color: black;
+    color: white;
+
 }
 
 
 .registerSubmitBtn {
     background-color: #CC0000;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Russo One', sans-serif;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
+    text-align: center;
 }
 .registerSubmitBtn:hover {
     background-color: black;
 }
 
-
-
-
 .signupBtn {
     background-color: #CC0000;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Russo One', sans-serif;
     font-size: 2em;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
+    text-align: center;
+        width: 100%;
 }
 .signupBtn:hover {
     background-color: black;
 }
+.signupBtnSm {
+    background-color: #CC0000;
+    font-family: 'Russo One', sans-serif;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
+    text-align: center;
+    color: white;
+}
+.signupBtnSm:hover {
+    background-color: black;
+    color: white;
+}
 
-.filters {
-    border-style: solid;
+.filtersBox {
+
+  border-style: solid;
+  border-color: black;
+  background-color: #CC0000;
+  margin-top: 20px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border-width: 4px;
+  box-shadow: 8px 8px .5em #000000;
+  text-align: center;
+/*    border-style: solid;
     border-color: #CC0000;
     border-width: 4px;
     box-shadow: 8px 8px .5em #000000;
     text-align: center;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', sans-serif;*/
 }
 
+.filters {
+    border-style: solid;
+  border-color: black;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  border-width: 2px;
+  box-shadow: 2px 2px .5em #000000;
+  text-align: center;
+}
 
+.filterFont {
+  font-size: 1.2em;
+  font-family: 'Russo One', sans-serif;
+}
+
+.filterTitle {
+  font-size: 1em;
+  font-family: 'Russo One', sans-serif;
+  color: #CC0000;
+  text-align: center;
+}
+[type="radio"].with-gap:checked+label:after {
+    border-radius: 50%;
+    border: black;
+    background-color: #CC0000;
+    z-index: 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+}
 
 
 .reviewBtn {
     background-color: #CC0000;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Russo One', sans-serif;
+    border-width: 2px;
+    box-shadow: 2px 2px .5em #000000;
+    text-align: center;
 }
 .reviewBtn:hover {
     background-color: black;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Russo One', sans-serif;
+
 }
 
 
-
-/*Parallex*/
+/*Parallex Section*/
 .parallax-bg3 {
     position: fixed;
     top: 0;
@@ -147,13 +251,48 @@ h1 {
 }
 
 .parallaxHeader {
-    color: white;
+    color: #CC0000;
     text-shadow: 3px 3px 0px #000;
-    font-family: 'Exo 2', sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
 
+/*COMPANY INFORMATION SECTION
+*/
+.companyNameBox {
+  border-style: solid;
+  border-color: black;
+  background-color: #CC0000;
+  margin-top: 20px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border-width: 4px;
+  box-shadow: 8px 8px .5em #000000;
+  text-align: center;
+}
+.companyName {
+  border-style: solid;
+  border-color: black;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border-width: 2px;
+  box-shadow: 2px 2px .5em #000000;
+  text-align: center;
+  font-family: 'Russo One', sans-serif;
+}
 
+.companyInfoHeader {
+  font-family: 'Russo One', sans-serif;
+}
+
+.companyInfo {
+  font-size: 1.2em;
+    color: #CC0000;
+  font-family: 'Russo One', sans-serif;
+}
 
 
 
@@ -162,22 +301,46 @@ h1 {
     height: 200px;
 }
 
-.fa-star {
+
+
+.fa-star, .fa-star-half-o, .fa-usd{
     color: black;
+}
+.starRating {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 
 
+.categoryOption {
+  color: black;
+}
 
 
 
-
+.loginHeader {
+  border-style: solid;
+  border-color: black;
+  background-color: #CC0000;
+  margin-top: 20px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border-width: 4px;
+  box-shadow: 8px 8px .5em #000000;
+  text-align: center;
+  padding-right: 10px;
+  padding-left: 10px;
+}
 
 
 /*FOOTER*/
 
 .creators {
     color: white;
+    font-family: 'Russo One', sans-serif;
+    text-align: center;
 }
 
 .creatorPic {
@@ -191,4 +354,31 @@ footer.page-footer {
 
 footer.page-footer .footer-copyright {
     background-color: #CC0000;
+}
+
+.footerBottom {
+  font-family: 'Russo One', sans-serif;
+}
+
+.ppl {
+  color: white;
+}
+.pplBorder {
+  border-style: solid;
+  border-color: white;
+    width: 230.5px;
+  height: 150px;
+  background-color: #CC0000;
+  margin-top: 20px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+
+
+
+
+
+h1 {
+  text-align: center;
 }
