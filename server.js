@@ -246,6 +246,7 @@ Review.belongsTo(Place);
 app.get('/', function(req, res){
     res.render('home', {Authenticated : req.isAuthenticated()});
     console.log(req.user);
+    console.log(req.isAuthenticated());
 });
 
 app.post('/login',
@@ -256,13 +257,14 @@ app.post('/login',
 
 
 app.get('/addplace', isLoggedIn, function(req,res, next) {
-  res.render('detail');
+  res.render('detail', {Authenticated : req.isAuthenticated()});
   console.log(req.user);
+  console.log(req.isAuthenticated());
 });
 
 app.get('/place', function(req, res){
   Place.findAll().then(function(reviews){
-    res.render('listing', {reviews});
+    res.render('listing', {reviews, Authenticated : req.isAuthenticated()});
   });
 });
 
@@ -272,7 +274,7 @@ app.get('/place/nightlife', function(req, res){
       category: 'nightlife'
     }
   }).then(function(reviews){
-    res.render('listing', {reviews});
+    res.render('listing', {reviews, Authenticated : req.isAuthenticated()});
   });
 });
 
@@ -282,7 +284,7 @@ app.get('/place/food', function(req, res){
       category: 'food'
     }
   }).then(function(reviews){
-    res.render('listing', {reviews});
+    res.render('listing', {reviews, Authenticated : req.isAuthenticated()});
   });
 });
 
@@ -290,7 +292,7 @@ app.get('/place/classroom-buildings', function(req, res){
   Place.findAll({
     where : {category: 'classroom-buildings'}
   }).then(function(reviews){
-    res.render('listing', {reviews});
+    res.render('listing', {reviews, Authenticated : req.isAuthenticated()});
   });
 });
 
@@ -298,7 +300,7 @@ app.get('/place/tourism', function(req, res){
   Place.findAll({
     where : {category: 'tourism'}
   }).then(function(reviews){
-    res.render('listing', {reviews});
+    res.render('listing', {reviews, Authenticated : req.isAuthenticated()});
   });
 });
 
@@ -313,7 +315,7 @@ app.get('/place/:category/:id', function(req, res){
       }]
     }]
   }).then(function(places){
-    res.render('singular', {places});
+    res.render('singular', {places, Authenticated : req.isAuthenticated()});
   });
 });
 
@@ -325,7 +327,7 @@ app.get("/deleteplace/:id", function(req, res) {
         model: User
       }]
     }).then(function(place) {
-    res.redirect('/?msg=Review deleted');
+    res.redirect('/?msg=Review deleted', {Authenticated : req.isAuthenticated()});
     }).catch(function(err) {
       console.log(err);
       res.redirect('/?msg=' + err.message);
@@ -338,7 +340,7 @@ app.get('/register', function(req, res){
 
 app.post('/register', function(req, res){
   User.create(req.body).then(function(user){
-    res.redirect('/?msg=Account Created, Please Login');
+    res.redirect('/?msg=Account Created, Please Login', {Authenticated : req.isAuthenticated()});
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
@@ -352,7 +354,7 @@ app.post('/newreview/:id', function(req, res){
   req.body.PlaceId = req.params.id;
 
   Review.create(req.body).then(function(review){
-    res.redirect('/?msg=Review Saved');
+    res.redirect('/?msg=Review Saved', {Authenticated : req.isAuthenticated()});
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
@@ -362,7 +364,7 @@ app.post('/newreview/:id', function(req, res){
 app.post('/addplace', function(req,res){
   req.body.UserId = req.user.id;
   Place.create(req.body).then(function(review){
-    res.redirect('/?msg=Place Saved');
+    res.redirect('/?msg=Place Saved', {Authenticated : req.isAuthenticated()});
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=' + err.message);
