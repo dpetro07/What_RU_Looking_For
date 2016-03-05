@@ -255,7 +255,7 @@ app.post('/login',
   );
 
 
-app.get('/addplace', function(req,res) {
+app.get('/addplace', isLoggedIn, function(req,res, next) {
   res.render('detail');
   console.log(req.user);
 });
