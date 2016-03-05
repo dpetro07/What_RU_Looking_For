@@ -346,6 +346,10 @@
 .creatorPic {
     height: 100px;
     width: 100px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 50%;
+    box-shadow: 3px 3px .5em #000000;
 }
 
 footer.page-footer {
@@ -358,6 +362,7 @@ footer.page-footer .footer-copyright {
 
 .footerBottom {
   font-family: 'Russo One', sans-serif;
+  text-align: center;
 }
 
 .ppl {
@@ -366,7 +371,7 @@ footer.page-footer .footer-copyright {
 .pplBorder {
   border-style: solid;
   border-color: white;
-    width: 230.5px;
+  width: 230.5px;
   height: 150px;
   background-color: #CC0000;
   margin-top: 20px;
@@ -382,3 +387,5 @@ footer.page-footer .footer-copyright {
 h1 {
   text-align: center;
 }
+
+
