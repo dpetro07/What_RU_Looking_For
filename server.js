@@ -284,9 +284,9 @@ app.get('/place/food', function(req, res){
   });
 });
 
-app.get('/place/classroom-buildings', function(req, res){
+app.get('/place/entertainment', function(req, res){
   Place.findAll({
-    where : {category: 'classroom-buildings'}
+    where : {category: 'entertainment'}
   }).then(function(reviews){
     res.render('listing', {reviews, Authenticated : req.isAuthenticated()});
   });

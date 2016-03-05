@@ -4,6 +4,7 @@
   <title></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
   <link rel="stylesheet" type="text/css" href="/css/app.css">
 
@@ -16,6 +17,7 @@
       <a href="#" class="brand-logo center dropdown-button" data-activates="dropdown1"></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="/">Home</a></li>
+        <li><a href="/">{{ username }}</a></li>
         <!-- Dropdown Structure -->
         <a class='dropdown-button btn red darken-4' href='#' data-activates='dropdown1'>Categories!</a>
         <ul id="dropdown1" class="dropdown-content">
@@ -23,9 +25,7 @@
           <li class="divider"></li>
           <li><a href="/place/nightlife">Nightlife</a></li>
           <li class="divider"></li>
-          <li><a href="/place/classroom-buildings">Classroom Buildings</a></li>
-          <li class="divider"></li>
-          <li><a href="/place/tourism">Tourism</a></li>
+          <li><a href="/place/entertainment">Entertainment</a></li>
         </ul>
       </ul>
       {{#if Authenticated}}
