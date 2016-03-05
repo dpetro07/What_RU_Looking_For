@@ -134,7 +134,7 @@ var Place = sequelize.define('Place', {
       }
     }
   },
-  desription: {
+  description: {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
@@ -146,7 +146,7 @@ var Place = sequelize.define('Place', {
 });
 
 var Review = sequelize.define('Review', {
-  message: {
+  comment: {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
@@ -245,8 +245,6 @@ Review.belongsTo(Place);
 
 app.get('/', function(req, res){
     res.render('home', {Authenticated : req.isAuthenticated()});
-    console.log(req.user);
-    console.log(req.isAuthenticated());
 });
 
 app.post('/login',
@@ -258,8 +256,6 @@ app.post('/login',
 
 app.get('/addplace', isLoggedIn, function(req,res, next) {
   res.render('detail', {Authenticated : req.isAuthenticated()});
-  console.log(req.user);
-  console.log(req.isAuthenticated());
 });
 
 app.get('/place', function(req, res){
