@@ -4,6 +4,8 @@
   <title></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Titillium+Web|Passion+One' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
   <link rel="stylesheet" type="text/css" href="/css/app.css">
 
@@ -14,7 +16,7 @@
   <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo center dropdown-button" data-activates="dropdown1"></a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <ul id="nav-mobile" class="left">
         <li><a href="/">Home</a></li>
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
@@ -25,12 +27,9 @@
           <li><a href="#!">Bars</a></li>
         </ul>
       </ul>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right">
         <a class="modal-trigger" href="#login">Login</a>
       </ul>      
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a >Register</a></li>
-      </ul>
     </div>
   </nav> 
 
@@ -43,7 +42,13 @@
      <div class="modal-content">
       <form class="col s12" id="login-form" method="POST" action="/login">
         
-          <h3 class="loginHeader">Please Login:</h3>
+            <div class="col l10 offset-l1 col m10 offset-m1 s10 offset-s1" style="
+    margin-bottom: 20px;
+">
+      <div class="col l6 offset-l2 col m6 offset-m2 col s10 offset-s1 companyNameBox loginHeader">
+    <h5 class="createReview companyName">Login</h5>
+  </div>
+</div>
           <div class="row">
             <div class="input-field col l10 offset-l1 m10 offset-m1 s12">
               <input id="username" type="text" name="username">
@@ -57,8 +62,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn modal-action modal-close waves-effect waves-green btn-flat loginCancel">Cancel</button>
-          <button type="submit" class="btn modal-action modal-close waves-effect waves-green btn-flat loginSubmit">Submit</button>
+          <button type="button" class="btn right modal-action modal-close waves-effect waves-green btn-flat loginCancel">Cancel</button>
+          <button type="submit" class="btn left modal-action modal-close waves-effect waves-green btn-flat loginSubmit">Submit</button>
         </div>
       </form>
      </div>
@@ -73,30 +78,47 @@
       <div class="col l12">
       <h1 class="creators">Meet the Makers</h1>
         <!-- Wolfgang -->
-          <div class="col l4">
+          <div class="col l4 offset-l1 col m2 offset-s3 pplBorder" style="
+    width: 178.5px;
+    height: 166px;
+">
             <h7 class="creators">Wolfgang Hall</h7>
             <br>
               <img class="creatorPic" src="images/wolfgang.png">
+            <br>
+              <i class="fa fa-briefcase fa-2x ppl"></i>
+              <i class="fa fa-github-square fa-2x ppl"></i>
           </div>
         <!-- Dan -->
-          <div class="col l4">
+          <div class="col l4 offset-l1 col m2 offset-s3 pplBorder" style="
+    width: 178.5px;
+    height: 166px;
+">
           <h7 class="creators">Daniel Petro</h7>
           <br>
             <img class="creatorPic" src="images/danielPetro.png">
+                        <br>
+              <i class="fa fa-briefcase fa-2x ppl"></i>
+              <i class="fa fa-github-square fa-2x ppl"></i>
           </div>
         <!-- Richard -->
-          <div class="col l4">
+          <div class="col l4 offset-l1 col m2 offset-s3 pplBorder" style="
+    width: 178.5px;
+    height: 166px;
+">
           <h7 class="creators">Richard Mensah</h7>
           <br>
             <img class="creatorPic" src="images/richard.png">
+                        <br>
+              <i class="fa fa-briefcase fa-2x ppl"></i>
+              <i class="fa fa-github-square fa-2x ppl"></i>
           </div>
       </div>
     </div>
   </div>
   <div class="footer-copyright">
     <div class="container">
-      © 2016 What'RU Looking For, All rights reserved
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      <p class="footerBottom">© 2016 What'RU Looking For, All rights reserved</p>
     </div>
   </div>
 </footer>
@@ -105,6 +127,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.js"></script>
+<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
 <script type="text/javascript" src="/js/validate.js"></script>
 <script type="text/javascript" src="/js/app.js"></script>

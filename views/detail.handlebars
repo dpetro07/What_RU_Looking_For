@@ -1,44 +1,50 @@
 
 <div class="container">
-  <div class="col s10 offset-s1">
-    <h1>Create Review</h1>
+<div class="row">
+  <div class="col l10 offset-l1 col m10 offset-m1 s10 offset-s1" style="
+    margin-bottom: 20px;
+">
+      <div class="col l10 offset-l1 col m10 offset-m1 col s10 offset-s1 companyNameBox">
+    <h5 class="createReview companyName">Create a Review</h5>
+  </div>
+</div>
 
     <div class="row">
-      <form action="/newplace" method="POST" class="col s12" id="placeform">
-        <div class="input-field col s10">
-          <select id="inputfield" name="category">
+      <form action="/newplace" method="POST" class="col l12 m12 s12 categoryChoice" id="placeform">
+        <div class="input-field col l10 offset-l1 col m10 offset-m1 s10 offset-s1">
+          <select id="inputfield" name="category" class="categoryOption">
             <option value="" disabled selected>Category</option>
-            <option value="">All</option>
-            <option value="food">Food</option>
-            <option value="entertainment">Entertainment</option>
+            <option value="" class="categoryOption">All</option>
+            <option value="food" class="categoryOption">Food</option>
+            <option value="entertainment" class="categoryOption">Entertainment</option>
             <option value="bars">Bars</option>
           </select>
-          <label>Category Select</label>
+          <label>What'RU looking to review</label>
         </div>
       </div>
 
       <div class="row">
-        <div class="input-field col s10">
+        <div class="input-field col l10 offset-l1 col m10 offset-m1 s10 offset-s1">
           <input id="icon_prefix" type="text" id="company" name="company">
-          <label for="icon_prefix">Company</label>
+          <label for="icon_prefix">Company or Place Name</label>
         </div>
       </div>    
 
       <div class="row">
-        <div class="input-field col s5">
+        <div class="input-field col l7 offset-l1 m7 offset-m1 s10 offset-s1">
           <input id="icon_prefix" type="text" id="address" name="address">
           <label for="icon_prefix">Address</label>
         </div>
 
-        <div class="input-field col s5">
+        <div class="input-field col l3 m3 s10 offset-s1">
           <input id="icon_telephone" type="tel" name="telephone">
-          <label for="icon_telephone">Telephone</label>
+          <label for="icon_telephone">Telephone #</label>
         </div>
       </div>
 
 
       <div class="row">
-        <div class="input-field col s5">
+        <div class="input-field col s5 offset-s1">
           <input id="icon_prefix" type="number" id="stars" name="stars">
           <label for="icon_prefix">Rating (1-5)</label>
         </div>
@@ -50,7 +56,7 @@
       </div>
 
 
-      <button class="btn waves-effect waves-light" type="submit">Submit
+      <button class="btn waves-effect waves-light reviewBtn col l4 offset-l4 col m4 offset-m4 col s6 offset-s3" type="submit">Submit
       </button>
     </form>
   </div>
